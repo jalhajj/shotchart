@@ -5,12 +5,12 @@ from matplotlib.patches import Circle, Rectangle, Arc
 
 st.title("Shot Chart Viewer")
 
-# Upload CSV
+# Upload CSVsss
 uploaded_file = st.file_uploader("Upload your game shots CSV", type=["csv"])
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
 else:
-    st.warning("Please upload a CSV file to continue.")
+    st.warning("Please upload a CSV file to continues.")
     st.stop()
 
 # Team selection
