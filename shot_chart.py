@@ -21,6 +21,11 @@ all_players = sorted(df[df['team'] == team]['player'].dropna().unique())
 player_selection = st.multiselect("Select Player(s)", ["All"] + all_players, default=["All"])
 players_filtered = all_players if "All" in player_selection else player_selection
 
+# Opponent MULTISELECT WITH "All" OPTION
+all_opponents = sorted(df[df['team'] == team]['oponent'].dropna().unique())
+opponent_selection = st.multiselect("Select Opponent(s)", ["All"] + all_opponents, default=["All"])
+opponents_filtered = all_opponents if "All" in opponent_selection else opponent_selection
+
 # QUARTER MULTISELECT WITH "All" OPTION
 df['quarter'] = df['quarter'].astype(str)  # Ensure quarters are strings for comparison
 all_quarters = sorted(df[df['team'] == team]['quarter'].dropna().unique())
@@ -28,7 +33,13 @@ quarter_selection = st.multiselect("Select Quarter(s)", ["All"] + all_quarters, 
 quarters_filtered = all_quarters if "All" in quarter_selection else quarter_selection
 
 # Filtered DataFrame
-filtered_df = df[(df['team'] == team) & (df['player'].isin(players_filtered)) & (df['quarter'].isin(quarters_filtered))]
+filtered_df = df[
+    (df['team'] == team) &
+    (df['player'].isin(players_filtered)) &
+    (df['quarter'].isin(quarters_filtered)) &
+    (df['oponent'].isin(opponents_filtered))
+]
+
 
 # Drawing functions
 def draw_court(ax=None, color='#BBBBBB', lw=2, outer_lines=True):
